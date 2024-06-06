@@ -1,0 +1,13 @@
+package in.ashokit.exception;
+
+public class AuthServiceException extends RuntimeException {
+
+	public AuthServiceException() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public AuthServiceException(String msg) {
+		super(msg);
+	}
+
+}

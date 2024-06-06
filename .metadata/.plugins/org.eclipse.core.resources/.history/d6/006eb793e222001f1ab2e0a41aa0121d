@@ -1,0 +1,7 @@
+package in.ashokit.config;
+
+@Configuration
+@EnableWebSecurity
+public class AppSecurityConfig {
+
+}

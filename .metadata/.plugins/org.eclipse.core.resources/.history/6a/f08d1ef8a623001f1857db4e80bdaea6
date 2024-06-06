@@ -1,0 +1,5 @@
+package in.ashokit.response;
+
+public class ApiResponse {
+
+}

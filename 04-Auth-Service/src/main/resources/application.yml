@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: Auth-Service        
+  config:
+    import: optional:configserver:http://localhost:2222/

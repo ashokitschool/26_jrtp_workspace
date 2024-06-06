@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: 03-Config-Server
+  cloud:
+    config:
+      server:
+        git:
+          uri: 
+          clone-on-start: true
+    
+server:
+  port: 2222    
+  
+  

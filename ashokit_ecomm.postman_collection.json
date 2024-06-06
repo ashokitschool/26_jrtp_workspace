@@ -1,0 +1,52 @@
+{
+	"info": {
+		"_postman_id": "d2bc59bb-42e8-44cb-a4c8-2c5d22557773",
+		"name": "ashokit_ecomm",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "33481337"
+	},
+	"item": [
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "user",
+							"value": "{\n\n \"fname\" : \"john\",\n \"lname\" : \"kumar\",\n \"email\" : \"john@gmail.com\",\n \"pwd\" : \"abc@123\",\n \"mobile\" : \"123456\"\n \n}",
+							"type": "text"
+						},
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/ashok/OneDrive/Desktop/Posters/gen-ai.jpg"
+						}
+					]
+				},
+				"url": "http://localhost:8081/register"
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"email\" : \"ashok@gmail.com\",\r\n \"pwd\" : \"abc@123\" \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8081/login"
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: 03-Config-Server
+    
+server:
+  port: 2222    
+  
+  
+  

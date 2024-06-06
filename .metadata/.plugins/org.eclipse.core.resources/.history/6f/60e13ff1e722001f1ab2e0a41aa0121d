@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: Auth-Service
+
+  boot:
+    admin:
+      client:
+        url: http://localhost:1111/
+        
+  config:
+    import: optional:configserver:http://localhost:2222/
+  datasource:
+    username: 
+    
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+        

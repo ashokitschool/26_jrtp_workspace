@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: Auth-Service        
+  config:
+    import: optional:configserver:http://localhost:2222/
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true

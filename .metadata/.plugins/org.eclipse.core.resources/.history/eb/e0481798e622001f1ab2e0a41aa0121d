@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: Auth-Service
+  datasource:
+    url: 
+    username:
+    password: 
+  jpa:
+    hibernate:
+      ddl-auto: update
+    
+server:
+  port: 8081
+  
+  

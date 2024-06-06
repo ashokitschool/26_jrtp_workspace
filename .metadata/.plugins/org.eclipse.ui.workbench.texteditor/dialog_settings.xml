@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item key="selection" value="resetPwdView"/>
+		<list key="findhistory">
+			<item value="resetPwdView"/>
+			<item value="registerView"/>
+			<item value="messages"/>
+			<item value="Messages"/>
+			<item value="smsg"/>
+			<item value="emsg"/>
+		</list>
+	</section>
+</section>
