@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import in.ashokit.dto.CategoryDto;
 import in.ashokit.entity.Category;
 import in.ashokit.mapper.CategoryMapper;
 import in.ashokit.repo.CategoryRepo;
 
+
+@Service
 public class CategoryServiceImpl implements CategoryService {
 	
 	@Autowired
