@@ -1,4 +1,4 @@
-package in.ashokit.utils;
+package in.ashokit.util;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,7 +11,7 @@ public class FileUtils {
 
 	public static String saveFile(String fileName, MultipartFile file) throws Exception {
 
-		Path uploadPath = Paths.get("uploadds/user-images");
+		Path uploadPath = Paths.get("uploads/product-images");
 
 		if (!Files.exists(uploadPath)) {
 			Files.createDirectories(uploadPath);
@@ -24,4 +24,5 @@ public class FileUtils {
 		return filePath.getFileName().toString();
 
 	}
+
 }
