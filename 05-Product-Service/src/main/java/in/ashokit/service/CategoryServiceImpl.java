@@ -12,7 +12,10 @@ import in.ashokit.mapper.CategoryMapper;
 import in.ashokit.repo.CategoryRepo;
 
 
+<<<<<<< HEAD
 @Service
+=======
+>>>>>>> 34845250af9c179c617660009dc3358659931237
 public class CategoryServiceImpl implements CategoryService {
 	
 	@Autowired
