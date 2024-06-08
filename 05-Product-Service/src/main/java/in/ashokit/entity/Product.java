@@ -20,7 +20,7 @@ public class Product {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer productId;
 	private String name;
-	private String desc;
+	private String description;
 	private Double price;
 	private Integer stock;
 	private String image;
@@ -55,12 +55,12 @@ public class Product {
 		this.name = name;
 	}
 
-	public String getDesc() {
-		return desc;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public Double getPrice() {
@@ -127,4 +127,5 @@ public class Product {
 		this.updatedDate = updatedDate;
 	}
 
+	
 }
