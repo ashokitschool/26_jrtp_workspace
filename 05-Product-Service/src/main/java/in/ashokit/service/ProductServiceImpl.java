@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import in.ashokit.constants.AppConstants;
 import in.ashokit.dto.ProductDto;
 import in.ashokit.entity.Product;
 import in.ashokit.exception.ProductServiceException;
@@ -33,7 +34,7 @@ public class ProductServiceImpl implements ProductService {
 	public ProductDto updateProduct(Integer productId, ProductDto productDto, MultipartFile file) {
 		// Handle file processing if needed
 		Product existingProduct = productRepo.findById(productId)
-				.orElseThrow(() -> new ProductServiceException("Product not found", "PRODUCT_NOT_FOUND"));
+				.orElseThrow(() -> new ProductServiceException(AppConstants.PRODUCT_NOT_FOUND,AppConstants.PRODUCT_NOT_FOUND_ERR_CD));
 		existingProduct.setName(productDto.getName());
 		existingProduct.setDescription(productDto.getDescription());
 		existingProduct.setPrice(productDto.getPrice());
@@ -58,14 +59,14 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public ProductDto getProductById(Integer productId) {
 		Product product = productRepo.findById(productId)
-				.orElseThrow(() -> new ProductServiceException("Product not found", "PRODUCT_NOT_FOUND"));
+				.orElseThrow(() -> new ProductServiceException(AppConstants.PRODUCT_NOT_FOUND,AppConstants.PRODUCT_NOT_FOUND_ERR_CD));
 		return ProductMapper.convertToDto(product);
 	}
 
 	@Override
 	public ProductDto deleteProductById(Integer productId) {
 		Product product = productRepo.findById(productId)
-				.orElseThrow(() -> new ProductServiceException("Product not found", "PRODUCT_NOT_FOUND"));
+				.orElseThrow(() -> new ProductServiceException(AppConstants.PRODUCT_NOT_FOUND,AppConstants.PRODUCT_NOT_FOUND_ERR_CD));
 		productRepo.delete(product);
 		return ProductMapper.convertToDto(product);
 	}
@@ -73,7 +74,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public boolean updateStock(Integer productId, Integer quantity) {
 		Product product = productRepo.findById(productId)
-				.orElseThrow(() -> new ProductServiceException("Product not found", "PRODUCT_NOT_FOUND"));
+				.orElseThrow(() -> new ProductServiceException(AppConstants.PRODUCT_NOT_FOUND,AppConstants.PRODUCT_NOT_FOUND_ERR_CD));
 		product.setStock(quantity);
 		productRepo.save(product);
 		return true;
