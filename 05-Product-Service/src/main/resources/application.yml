@@ -1,0 +1,34 @@
+spring:
+  application:
+    name: 05-Product-Service
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: Natabar@143
+    url: jdbc:mysql://localhost:3306/ashokit_ecomm
+    username: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+    show-sql: true
+    
+server:
+  port: 8082
+  
+product-service:
+ messages:
+  categoryAdded: Category Added Successfully
+  categoryAddErr: Failed to Add Category
+  categoryUpdate: Category Updated Successfully
+  categoryUpdateErr: Failed to update category
+  categoryFetch: All Categories fetched successfully
+  categoryFetchErr: Failed to fetch all categories
+  categorySelect: Category Retrieved Successfully
+  categorySelectErr: Failed to retrieve category
+  categoryDelete: Category deleted successfully
+  categoryDeleteErr: Failed to delete category
+  
+  
+        

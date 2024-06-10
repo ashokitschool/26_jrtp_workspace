@@ -18,67 +18,64 @@ import in.ashokit.repo.ProductRepo;
 @Service
 public class ProductServiceImpl implements ProductService {
 
+	@Autowired
+	private ProductRepo productRepo;
 
-	
-    @Autowired
-    private ProductRepo productRepo;
+	@Override
+	public ProductDto addProduct(ProductDto productDto, MultipartFile file) {
+		// Handle file processing if needed
+		Product product = ProductMapper.convertToEntity(productDto);
+		Product savedProduct = productRepo.save(product);
+		return ProductMapper.convertToDto(savedProduct);
+	}
 
-    @Override
-    public ProductDto addProduct(ProductDto productDto, MultipartFile file) {
-        // Handle file processing if needed
-        Product product = ProductMapper.convertToEntity(productDto);
-        Product savedProduct = productRepo.save(product);
-        return ProductMapper.convertToDto(savedProduct);
-    }
+	@Override
+	public ProductDto updateProduct(Integer productId, ProductDto productDto, MultipartFile file) {
+		// Handle file processing if needed
+		Product existingProduct = productRepo.findById(productId)
+				.orElseThrow(() -> new ProductServiceException("Product not found", "PRODUCT_NOT_FOUND"));
+		existingProduct.setName(productDto.getName());
+		existingProduct.setDescription(productDto.getDescription());
+		existingProduct.setPrice(productDto.getPrice());
+		existingProduct.setStock(productDto.getStock());
+		existingProduct.setImage(productDto.getImage());
+		existingProduct.setDiscount(productDto.getDiscount());
+		existingProduct.setPriceBeforeDiscount(productDto.getPriceBeforeDiscount());
 
-    @Override
-    public ProductDto updateProduct(Integer productId, ProductDto productDto, MultipartFile file) {
-        // Handle file processing if needed
-        Product existingProduct = productRepo.findById(productId)
-                .orElseThrow(() -> new ProductServiceException("Product not found", "PRODUCT_NOT_FOUND"));
-        existingProduct.setName(productDto.getName());
-       existingProduct.setDescription(productDto.getDescription());
-        existingProduct.setPrice(productDto.getPrice());
-        existingProduct.setStock(productDto.getStock());
-        existingProduct.setImage(productDto.getImage());
-        existingProduct.setDiscount(productDto.getDiscount());
-        existingProduct.setPriceBeforeDiscount(productDto.getPriceBeforeDiscount());
+		// Assuming you have a method to convert CategoryDto to Category entity
+		existingProduct.setCategory(CategoryMapper.convertToEntity(productDto.getCategory()));
 
-        // Assuming you have a method to convert CategoryDto to Category entity
-        existingProduct.setCategory(CategoryMapper.convertToEntity(productDto.getCategory()));
+		Product updatedProduct = productRepo.save(existingProduct);
+		return ProductMapper.convertToDto(updatedProduct);
+	}
 
-        Product updatedProduct = productRepo.save(existingProduct);
-        return ProductMapper.convertToDto(updatedProduct);
-    }
+	@Override
+	public List<ProductDto> getAllProducts() {
+		List<Product> products = productRepo.findAll();
+		return products.stream().map(ProductMapper::convertToDto).collect(Collectors.toList());
+	}
 
+	@Override
+	public ProductDto getProductById(Integer productId) {
+		Product product = productRepo.findById(productId)
+				.orElseThrow(() -> new ProductServiceException("Product not found", "PRODUCT_NOT_FOUND"));
+		return ProductMapper.convertToDto(product);
+	}
 
-    @Override
-    public List<ProductDto> getAllProducts() {
-        List<Product> products = productRepo.findAll();
-        return products.stream().map(ProductMapper::convertToDto).collect(Collectors.toList());
-    }
+	@Override
+	public ProductDto deleteProductById(Integer productId) {
+		Product product = productRepo.findById(productId)
+				.orElseThrow(() -> new ProductServiceException("Product not found", "PRODUCT_NOT_FOUND"));
+		productRepo.delete(product);
+		return ProductMapper.convertToDto(product);
+	}
 
-    @Override
-    public ProductDto getProductById(Integer productId) {
-        Product product = productRepo.findById(productId)
-                .orElseThrow(() -> new ProductServiceException("Product not found", "PRODUCT_NOT_FOUND"));
-        return ProductMapper.convertToDto(product);
-    }
-
-    @Override
-    public ProductDto deleteProductById(Integer productId) {
-        Product product = productRepo.findById(productId)
-                .orElseThrow(() -> new ProductServiceException("Product not found", "PRODUCT_NOT_FOUND"));
-        productRepo.delete(product);
-        return ProductMapper.convertToDto(product);
-    }
-
-    @Override
-    public boolean updateStock(Integer productId, Integer quantity) {
-        Product product = productRepo.findById(productId)
-                .orElseThrow(() -> new ProductServiceException("Product not found", "PRODUCT_NOT_FOUND"));
-        product.setStock(quantity);
-        productRepo.save(product);
-        return true;
-    }
+	@Override
+	public boolean updateStock(Integer productId, Integer quantity) {
+		Product product = productRepo.findById(productId)
+				.orElseThrow(() -> new ProductServiceException("Product not found", "PRODUCT_NOT_FOUND"));
+		product.setStock(quantity);
+		productRepo.save(product);
+		return true;
+	}
 }
