@@ -2,65 +2,83 @@ package in.ashokit.service;
 
 import java.util.List;
 
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
-import in.ashokit.entity.Category;
+import in.ashokit.dto.ProductDto;
 import in.ashokit.entity.Product;
-import in.ashokit.repo.CategoryRepo;
+import in.ashokit.exception.ProductServiceException;
+import in.ashokit.mapper.CategoryMapper;
+import in.ashokit.mapper.ProductMapper;
 import in.ashokit.repo.ProductRepo;
 
 @Service
-public class ProductServiceImpl implements ProductService{
-	
-	@Autowired
-	private ProductRepo productRepo;
-	
-	@Autowired
-	private CategoryRepo categoryRepo;
-	
-	@Override
-	public Product saveProduct(Product productEntity) {
-		Category categoryEntity = categoryRepo.findById(productEntity.getCategory().getId()).orElseThrow();
-		productEntity.setCategory(categoryEntity);
-		return productRepo.save(productEntity);
-	}
-	
-	public List<Product> getProducts() {
-		List<Product> all = productRepo.findAll();
-		return all;
-	}
-	
-	@Override
-	public Product getProductById(Integer id) {
-		Product productEntity = productRepo.findById(id).orElseThrow();
-		return productEntity;
-	}
-	
-	//update the category
-	@Override
-	public Product updateProduct(Product product) {
-		Product productEntity=new Product();
-		productEntity.setProductId(product.getProductId());
-		productEntity.setProductName(product.getProductName());
-		productEntity.setCategory(product.getCategory());
-		productEntity.setDescription(product.getDescription());
-		productEntity.setDiscount(product.getDiscount());
-		productEntity.setImage(product.getImage());
-		productEntity.setPrice(product.getPrice());
-		productEntity.setStock(product.getStock());
-			return productEntity;
-		}
-	
-	@Override
-	public void deleteProduct(Integer id) {
-		productRepo.deleteById(id);
-	}
+public class ProductServiceImpl implements ProductService {
 
-	@Override
-	public boolean updateStock(Integer id, Integer quatity) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
+	
+    @Autowired
+    private ProductRepo productRepo;
+
+    @Override
+    public ProductDto addProduct(ProductDto productDto, MultipartFile file) {
+        // Handle file processing if needed
+        Product product = ProductMapper.convertToEntity(productDto);
+        Product savedProduct = productRepo.save(product);
+        return ProductMapper.convertToDto(savedProduct);
+    }
+
+    @Override
+    public ProductDto updateProduct(Integer productId, ProductDto productDto, MultipartFile file) {
+        // Handle file processing if needed
+        Product existingProduct = productRepo.findById(productId)
+                .orElseThrow(() -> new ProductServiceException("Product not found", "PRODUCT_NOT_FOUND"));
+        existingProduct.setName(productDto.getName());
+       existingProduct.setDescription(productDto.getDescription());
+        existingProduct.setPrice(productDto.getPrice());
+        existingProduct.setStock(productDto.getStock());
+        existingProduct.setImage(productDto.getImage());
+        existingProduct.setDiscount(productDto.getDiscount());
+        existingProduct.setPriceBeforeDiscount(productDto.getPriceBeforeDiscount());
+
+        // Assuming you have a method to convert CategoryDto to Category entity
+        existingProduct.setCategory(CategoryMapper.convertToEntity(productDto.getCategory()));
+
+        Product updatedProduct = productRepo.save(existingProduct);
+        return ProductMapper.convertToDto(updatedProduct);
+    }
+
+
+    @Override
+    public List<ProductDto> getAllProducts() {
+        List<Product> products = productRepo.findAll();
+        return products.stream().map(ProductMapper::convertToDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public ProductDto getProductById(Integer productId) {
+        Product product = productRepo.findById(productId)
+                .orElseThrow(() -> new ProductServiceException("Product not found", "PRODUCT_NOT_FOUND"));
+        return ProductMapper.convertToDto(product);
+    }
+
+    @Override
+    public ProductDto deleteProductById(Integer productId) {
+        Product product = productRepo.findById(productId)
+                .orElseThrow(() -> new ProductServiceException("Product not found", "PRODUCT_NOT_FOUND"));
+        productRepo.delete(product);
+        return ProductMapper.convertToDto(product);
+    }
+
+    @Override
+    public boolean updateStock(Integer productId, Integer quantity) {
+        Product product = productRepo.findById(productId)
+                .orElseThrow(() -> new ProductServiceException("Product not found", "PRODUCT_NOT_FOUND"));
+        product.setStock(quantity);
+        productRepo.save(product);
+        return true;
+    }
 }
