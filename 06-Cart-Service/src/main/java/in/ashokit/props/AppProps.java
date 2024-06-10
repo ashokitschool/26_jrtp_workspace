@@ -7,12 +7,15 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
+
 @EnableConfigurationProperties
-@ConfigurationProperties(prefix="cart-service")
+@ConfigurationProperties(prefix = "cart-service")
 @Configuration
 public class AppProps {
 
-	private Map<String,String> messages = new HashMap<>();
+
+	private Map<String, String> messages = new HashMap<>();
+
 
 	public Map<String, String> getMessages() {
 		return messages;

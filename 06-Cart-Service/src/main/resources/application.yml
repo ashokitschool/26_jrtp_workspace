@@ -13,6 +13,10 @@ spring:
       ddl-auto: update
     show-sql: true
 
+  boot:
+    admin:
+      client:
+        url: http://localhost:1111/
 management:
   endpoints:
     web:
