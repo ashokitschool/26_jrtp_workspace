@@ -44,7 +44,7 @@ public class CartServiceImpl implements CartService {
 
 	@Override
 	public CartDto getCartByUserId(Integer userId) {
-		Cart cart=cartRepo.findById(userId).orElseThrow();
+		Cart cart=cartRepo.findByUserId(userId).orElseThrow();
 		CartDto cartDto=CartMapper.convertToDto(cart);
 		return cartDto;
 	}
