@@ -29,6 +29,16 @@ product-service:
   categorySelectErr: Failed to retrieve category
   categoryDelete: Category deleted successfully
   categoryDeleteErr: Failed to delete category
+  productAdded: Product Added Successfully
+  productAddErr: Failed to Add Product
+  productUpdate: Product Updated Successfully
+  productUpdateErr: Failed to update Product
+  productFetch: All Products fetched successfully
+  productFetchErr: Failed to fetch all Products
+  productSelect: Product Retrieved Successfully
+  productSelectErr: Failed to retrieve Product
+  productDelete: Product deleted successfully
+  productDeleteErr: Failed to delete Product
   
   
         

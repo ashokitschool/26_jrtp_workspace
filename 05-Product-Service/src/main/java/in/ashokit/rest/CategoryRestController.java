@@ -54,16 +54,18 @@ public class CategoryRestController {
 	@PutMapping("/{id}")
 	public ResponseEntity<ApiResponse<CategoryDto>> updateCategory(@PathVariable("id") Integer categoryId,
 			@RequestBody CategoryDto categoryDto) {
+		
+		Map<String, String> messages = props.getMessages();
 		CategoryDto updatedCategory = categoryService.updateCategory(categoryId, categoryDto);
 		ApiResponse<CategoryDto> response = new ApiResponse<>();
 
 		if (updatedCategory != null) {
 			response.setStatusCode(200);
-			response.setMessage("Category Updated Successfully");
+			response.setMessage(messages.get("categoryUpdate"));
 			response.setData(updatedCategory);
 		} else {
 			response.setStatusCode(500);
-			response.setMessage("Failed To Update Category");
+			response.setMessage(messages.get("categoryUpdateErr"));
 		}
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(response);
@@ -71,16 +73,18 @@ public class CategoryRestController {
 
 	@GetMapping
 	public ResponseEntity<ApiResponse<List<CategoryDto>>> getAllCategories() {
+		
+		Map<String, String> messages = props.getMessages();
 		List<CategoryDto> categories = categoryService.getAllCategories();
 
 		ApiResponse<List<CategoryDto>> response = new ApiResponse<>();
 
 		if (categories != null) {
-			response.setMessage("Categories fetches successfully");
+			response.setMessage(messages.get("categoryFetch"));
 			response.setStatusCode(200);
 			response.setData(categories);
 		} else {
-			response.setMessage("Categories fetches successfully");
+			response.setMessage(messages.get("categoryFetchErr"));
 			response.setStatusCode(200);
 		}
 		return ResponseEntity.status(HttpStatus.OK).body(response);
@@ -88,34 +92,37 @@ public class CategoryRestController {
 
 	@GetMapping("/{id}")
 	public ResponseEntity<ApiResponse<CategoryDto>> getCategoryById(@PathVariable("id") Integer categoryId) {
+		Map<String, String> messages = props.getMessages();
 		CategoryDto category = categoryService.getCategoryById(categoryId);
 
 		ApiResponse<CategoryDto> response = new ApiResponse<>();
 
 		if (category != null) {
 			response.setStatusCode(200);
-			response.setMessage("Category Retrieved Successfully");
+			response.setMessage(messages.get("categorySelect"));
 			response.setData(category);
 		} else {
 			response.setStatusCode(500);
-			response.setMessage("Failed To Retrieve Category");
+			response.setMessage(messages.get("categorySelectErr"));
 		}
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<ApiResponse<CategoryDto>> deleteCategoryById(@PathVariable("id") Integer categoryId) {
+		
+		Map<String, String> messages = props.getMessages();
 		CategoryDto deletedCategory = categoryService.deleteCategoryById(categoryId);
 
 		ApiResponse<CategoryDto> response = new ApiResponse<>();
 
 		if (deletedCategory != null) {
 			response.setStatusCode(200);
-			response.setMessage("Category Deleted Successfully");
+			response.setMessage(messages.get("categoryDelete"));
 			response.setData(deletedCategory);
 		} else {
 			response.setStatusCode(500);
-			response.setMessage("Failed To Delete Category");
+			response.setMessage(messages.get("categoryDeleteErr"));
 		}
 		return ResponseEntity.status(HttpStatus.OK).body(response);
 	}
