@@ -1,0 +1,5 @@
+spring:
+  application:
+      name: Orders-Service
+  config:
+      import: optional:configserver:http://localhost:2222/
