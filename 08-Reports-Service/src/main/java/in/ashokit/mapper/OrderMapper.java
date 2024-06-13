@@ -9,7 +9,6 @@ import in.ashokit.entity.Order;
 @Component
 public class OrderMapper {
 
-	
 	private static final ModelMapper mapper = new ModelMapper();
 
 	public static OrderDto convertToDto(Order order) {

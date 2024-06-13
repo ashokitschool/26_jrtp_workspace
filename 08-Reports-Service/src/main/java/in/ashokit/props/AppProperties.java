@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @EnableConfigurationProperties
-@ConfigurationProperties(prefix="reports-service")
+@ConfigurationProperties(prefix = "reports-service")
 public class AppProperties {
 	private Map<String, String> messages = new HashMap<>();
 
@@ -20,6 +20,4 @@ public class AppProperties {
 	public void setMessages(Map<String, String> messages) {
 		this.messages = messages;
 	}
-
-
 }
