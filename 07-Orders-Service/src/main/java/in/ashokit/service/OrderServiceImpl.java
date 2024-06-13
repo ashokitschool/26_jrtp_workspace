@@ -5,14 +5,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import in.ashokit.dto.ProductOrderDto;
 import in.ashokit.entity.Orders;
-import in.ashokit.exception.OrderServiceException;
 import in.ashokit.mapper.OrderMapper;
 import in.ashokit.repo.OrdersRepository;
 
+@Service
 public class OrderServiceImpl implements OrderService {
+	
 	@Autowired
 	private OrdersRepository orderRepo;
 
@@ -41,7 +43,6 @@ public class OrderServiceImpl implements OrderService {
 			
 		}else {
 		return null;
-		//throw new OrderServiceException("Given OrderId is Not FOund :"+productOrderDto.getOrderId(),"400");
 		}
 	}
 
@@ -71,7 +72,5 @@ public class OrderServiceImpl implements OrderService {
 	public List<ProductOrderDto> getAllOrders() {
 		List<Orders> orders=orderRepo.findAll();
 		return orders.stream().map(OrderMapper::convertToDto).collect(Collectors.toList());
-
 	}
-
 }
