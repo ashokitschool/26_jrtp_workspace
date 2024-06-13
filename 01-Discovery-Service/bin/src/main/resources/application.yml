@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: 01-Discovery-Service
+    
+server:
+  port: 8761
+  
+eureka:
+  client:
+    register-with-eureka: false      

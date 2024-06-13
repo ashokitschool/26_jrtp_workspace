@@ -22,7 +22,6 @@
     <fullyQualifiedTypeName name="in.ashokit.entity.Role"/>
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="java.lang.RuntimeException"/>
-    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RestControllerAdvice"/>
     <fullyQualifiedTypeName name="in.ashokit.exception.AuthServiceException"/>
     <fullyQualifiedTypeName name="lombok.Builder"/>
     <fullyQualifiedTypeName name="in.ashokit.exception.ExResponse"/>
@@ -53,4 +52,5 @@
     <fullyQualifiedTypeName name="java.util.Optional"/>
     <fullyQualifiedTypeName name="org.springframework.http.HttpStatus"/>
     <fullyQualifiedTypeName name="in.ashokit.constants.AppConstants"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RestControllerAdvice"/>
 </qualifiedTypeNameHistroy>
