@@ -23,7 +23,7 @@ public class ReportsServiceImpl implements ReportsService{
 	
 	@Override
 	public List<OrderDto> getAllOrders() {
-		// TODO Auto-generated method stub
+		
 		
 		List<Order> orders = orderRepo.findAll();
 		
@@ -37,8 +37,8 @@ public class ReportsServiceImpl implements ReportsService{
 	}
 	@Override
 	public List<OrderDto> getOrdersBetweenDate(LocalDate startDate, LocalDate endDate) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Order> dates = orderRepo.findOrderBetweenDates(startDate, endDate);
+		return dates.stream().map(OrderMapper::convertToDto).collect(Collectors.toList());
 	}
 
 }

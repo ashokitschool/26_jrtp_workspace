@@ -90,6 +90,7 @@ public class ProductRest {
 	}
 
     @GetMapping("/{id}")
+    
     public ResponseEntity<ApiResponse<ProductDto>> getProductById(@PathVariable("id") Integer productId) {
     	Map<String, String> messages = props.getMessages();
     	
