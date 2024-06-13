@@ -3,6 +3,7 @@ package in.ashokit.rest;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,34 +15,55 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import in.ashokit.Service.ReportsService;
 import in.ashokit.dto.OrderDto;
+import in.ashokit.dto.ReportsDto;
+import in.ashokit.entity.Order;
 import in.ashokit.entity.OrderStatus;
 import in.ashokit.exception.ReportsServiceException;
 import in.ashokit.utils.ExcelGenerator;
 import in.ashokit.utils.PdfGenerator;
 
 @RestController
+@RequestMapping("/reports")
 public class ReportsRestController {
 
 	@Autowired
 	private ReportsService reportsService;
 
-	@GetMapping("/allOrderExcel")
-	public ResponseEntity<InputStreamResource> downloadExcel() {
-		List<OrderDto> orders = reportsService.getAllOrders();
+	@GetMapping("/FilterOrderExcel")
+	public ResponseEntity<InputStreamResource> downloadExcel(ReportsDto reportsDto) throws ReportsServiceException {
+		List<OrderDto> orders = new ArrayList<>();
+
+		if (reportsDto.getStatus() != null) {
+			orders = reportsService.orderByStatus(reportsDto.getStatus());
+		}
+
+		if (reportsDto.getStartDate() != null || reportsDto.getEndDate() != null) {
+			List<OrderDto> dateFilteredOrders = reportsService.getOrdersBetweenDate(reportsDto.getStartDate(),
+					reportsDto.getEndDate());
+			if (!orders.isEmpty()) {
+				orders.retainAll(dateFilteredOrders);
+			} else {
+				orders = dateFilteredOrders;
+			}
+		}
+
+		if (reportsDto.getStatus() == null && reportsDto.getStartDate() == null && reportsDto.getEndDate() == null) {
+			orders = reportsService.getAllOrders();
+		}
+
 		if (orders != null) {
 			try {
 				ByteArrayInputStream in = ExcelGenerator.generateExcel(orders);
 				InputStreamResource resource = new InputStreamResource(in);
 				HttpHeaders headers = new HttpHeaders();
-				return ResponseEntity.ok()
-									 .headers(headers)
-									 .contentType(MediaType.APPLICATION_OCTET_STREAM)
-									 .body(resource);
+				return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_OCTET_STREAM)
+						.body(resource);
 			} catch (IOException e) {
 				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 			}
@@ -50,90 +72,34 @@ public class ReportsRestController {
 		}
 	}
 
-	@GetMapping("/allOrderPdf")
-	public ResponseEntity<InputStreamResource> allOrderPdf() throws ReportsServiceException {
-		List<OrderDto> orders = reportsService.getAllOrders();
+	@GetMapping("/FilterOrderPdf")
+	public ResponseEntity<InputStreamResource> downloadPdf(ReportsDto reportsDto) throws ReportsServiceException {
+
+		List<OrderDto> orders = new ArrayList<>();
+
+		if (reportsDto.getStatus() != null) {
+			orders = reportsService.orderByStatus(reportsDto.getStatus());
+		}
+
+		if (reportsDto.getStartDate() != null || reportsDto.getEndDate() != null) {
+			List<OrderDto> dateFilteredOrders = reportsService.getOrdersBetweenDate(reportsDto.getStartDate(),
+					reportsDto.getEndDate());
+			if (!orders.isEmpty()) {
+				orders.retainAll(dateFilteredOrders);
+			} else {
+				orders = dateFilteredOrders;
+			}
+		}
+
+		if (reportsDto.getStatus() == null && reportsDto.getStartDate() == null && reportsDto.getEndDate() == null) {
+			orders = reportsService.getAllOrders();
+		}
+
 		if (orders != null) {
 			ByteArrayInputStream in = PdfGenerator.generatePdf(orders);
 			InputStreamResource resource = new InputStreamResource(in);
 			HttpHeaders headers = new HttpHeaders();
-			return ResponseEntity.ok()
-								 .headers(headers)
-								 .contentType(MediaType.APPLICATION_OCTET_STREAM)
-								 .body(resource);
-		} else {
-			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-		}
-	}
-
-	@GetMapping("/OrderPdf/{status}")
-	public ResponseEntity<InputStreamResource> OrderStatusPdf(@PathVariable("status") OrderStatus status)
-			throws ReportsServiceException {
-		List<OrderDto> orders = reportsService.orderByStatus(status);
-		if (orders != null) {
-			ByteArrayInputStream in = PdfGenerator.generatePdf(orders);
-			InputStreamResource resource = new InputStreamResource(in);
-			HttpHeaders headers = new HttpHeaders();
-			return ResponseEntity.ok()
-							     .headers(headers)
-							     .contentType(MediaType.APPLICATION_OCTET_STREAM)
-							     .body(resource);
-		} else {
-			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-		}
-	}
-
-	@GetMapping("/OrderExcel/{status}")
-	public ResponseEntity<InputStreamResource> OrderStatusExcel(@PathVariable("status") OrderStatus status)
-			throws ReportsServiceException, IOException {
-		List<OrderDto> orders = reportsService.orderByStatus(status);
-		if (orders != null) {
-			ByteArrayInputStream in = ExcelGenerator.generateExcel(orders);
-			InputStreamResource resource = new InputStreamResource(in);
-			HttpHeaders headers = new HttpHeaders();
-			return ResponseEntity.ok()
-							     .headers(headers)
-							     .contentType(MediaType.APPLICATION_OCTET_STREAM)
-							     .body(resource);
-		} else {
-			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-		}
-
-	}
-
-	@GetMapping("/OrderdatesExcel")
-	public ResponseEntity<InputStreamResource> OrderBetweenDates(
-			@RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
-			@RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate)
-			throws ReportsServiceException, IOException {
-		List<OrderDto> orders = reportsService.getOrdersBetweenDate(startDate, endDate);
-		if (orders != null) {
-			ByteArrayInputStream in = ExcelGenerator.generateExcel(orders);
-			InputStreamResource resource = new InputStreamResource(in);
-			HttpHeaders headers = new HttpHeaders();
-			return ResponseEntity.ok()
-							     .headers(headers)
-							     .contentType(MediaType.APPLICATION_OCTET_STREAM)
-							     .body(resource);
-		} else {
-			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-		}
-	}
-
-	@GetMapping("/OrderdatesPdf")
-	public ResponseEntity<InputStreamResource> OrderBetweenDatesPdf(
-			@RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
-			@RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate)
-			throws ReportsServiceException {
-		List<OrderDto> orders = reportsService.getOrdersBetweenDate(startDate, endDate);
-		if (orders != null) {
-			ByteArrayInputStream in = PdfGenerator.generatePdf(orders);
-			InputStreamResource resource = new InputStreamResource(in);
-			HttpHeaders headers = new HttpHeaders();
-			return ResponseEntity.ok()
-								 .headers(headers)
-								 .contentType(MediaType.APPLICATION_OCTET_STREAM)
-								 .body(resource);
+			return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_OCTET_STREAM).body(resource);
 		} else {
 			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 		}
