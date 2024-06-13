@@ -46,7 +46,7 @@ public class CartRestController {
 	}
 	
 	@PutMapping("/updateCart")
-	public ResponseEntity<ApiResponse<CartDto>> updateCartByUserId(@RequestBody CartDto cartDto){
+	public ResponseEntity<ApiResponse<CartDto>> updateCartQuantityById(@RequestBody CartDto cartDto){
 		CartDto updateCart=cartService.updateCartQuantityById(cartDto);
 		
 		ApiResponse<CartDto> response =new ApiResponse<>();
@@ -80,13 +80,14 @@ public class CartRestController {
 	}
 	
 	@DeleteMapping("/deletecart/{id}")
-	public ResponseEntity<ApiResponse<String>> deleteCartById(@PathVariable("id") Integer cartId) {
-	    ApiResponse<String> response = new ApiResponse<>();
+	public ResponseEntity<ApiResponse<CartDto>> deleteCartById(@PathVariable("id") Integer cartId) {
+	    ApiResponse<CartDto> response = new ApiResponse<>();
 	    Map<String, String> messages = appProp.getMessages();
 
-	    cartService.deleteCartById(cartId);
+	    CartDto deletedCart = cartService.deleteCartById(cartId); 
 	    response.setStatusCode(200);
 	    response.setMessage(messages.get(AppConstants.CART_DELETE_SUCESS));
+	    response.setData(deletedCart);
 	    return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 	

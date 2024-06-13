@@ -2,6 +2,7 @@
 <section name="Workbench">
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="H:\Workspace\project-ecommerce\26_jrtp_workspace"/>
 			<item value="C:\Users\ashok\classes\26-JRTP\workspace\user_mgmt_app"/>
 		</list>
 		<list key="projectNameTemplate">

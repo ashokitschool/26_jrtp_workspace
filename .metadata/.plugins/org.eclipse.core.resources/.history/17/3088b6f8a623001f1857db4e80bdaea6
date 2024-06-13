@@ -1,9 +1,0 @@
-package in.ashokit.response;
-
-public class ApiResponse<T> {
-	
-	 private Integer status;
-	    private String message;
-	    private T data;
-	
-}

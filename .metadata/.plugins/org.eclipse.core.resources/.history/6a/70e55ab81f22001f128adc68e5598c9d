@@ -1,9 +1,0 @@
-package in.ashokit.service;
-
-import in.ashokit.entity.Role;
-
-public interface RoleService {
-	
-	public Role createRole(Role role);
-
-}

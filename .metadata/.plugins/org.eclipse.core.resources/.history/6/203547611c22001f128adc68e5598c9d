@@ -1,9 +1,0 @@
-package in.ashokit.entity;
-
-import jakarta.persistence.Entity;
-
-@Entity
-@Table(name = "users")
-public class User {
-
-}

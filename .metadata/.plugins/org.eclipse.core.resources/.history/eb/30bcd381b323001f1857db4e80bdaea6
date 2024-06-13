@@ -1,7 +1,0 @@
-package in.ashokit.constants;
-
-public class AppConstants {
-	
-	public static final String USER_REG = "userReg";
-
-}

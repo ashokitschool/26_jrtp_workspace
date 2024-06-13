@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="RefactoringWizard.preview">
-		<item key="width" value="560"/>
-		<item key="height" value="360"/>
+		<item key="width" value="630"/>
+		<item key="height" value="350"/>
 	</section>
 	<section name="org.eclipse.ltk.ui.refactoring.settings">
+	</section>
+	<section name="ExtractTempWizard">
+		<item key="declareFinal" value="false"/>
+		<item key="declarevariableTypeVar" value="false"/>
+		<item key="replaceOccurrences" value="true"/>
+		<item key="replaceOccurrencesInThisFile" value="false"/>
 	</section>
 </section>

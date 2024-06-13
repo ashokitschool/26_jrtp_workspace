@@ -1,5 +1,0 @@
-package in.ashokit.repo;
-
-public interface UserRepo {
-
-}

@@ -10,6 +10,6 @@ public interface CartService {
 
 	public CartDto getCartByUserId(Integer userId);
 
-	public void deleteCartById(Integer cartId);
+	public CartDto deleteCartById(Integer cartId);
 
 }
