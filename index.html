@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Checkout</title>
+</head>
+
+<body>
+    <button id="rzp-button1">Pay with Razorpay</button>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+        async function fetchOrder() {
+            console.log("create order call happing");
+            const response = await fetch('http://localhost:8888/payment/intiate-payment', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    amount: 200,
+                    currency: 'INR',
+                    orderId: 10346
+                })
+            });
+
+            const order = await response.json();
+            console.log("create call success")
+            console.log(order);
+            return order;
+        }
+
+        document.getElementById('rzp-button1').onclick = async function (e) {
+            const order = await fetchOrder();
+
+            var options = {
+                "key": "rzp_test_kspJQ60PPQZBwe",
+                "amount": order.amount,
+                "currency": order.currency,
+                "name": "Infinity Mart",
+                "description": "Test Transaction",
+                "order_id": order.id,
+                "receipt": order.receipt,
+                "callback_url": "http://localhost:8888/payment/payment-callback",
+                "prefill": {
+                    "name": "rajesh",
+                    "email": "rajesh@example.com",
+                    "contact": "7999902228"
+                },
+                "theme": {
+                    "color": "#3399cc"
+                }
+            };
+            var rzp1 = new Razorpay(options);
+            rzp1.open();
+            e.preventDefault();
+        }
+    </script>
+</body>
+
+</html>
