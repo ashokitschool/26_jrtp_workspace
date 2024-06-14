@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: 09-Payment-Service
+  config:
+    import: optional:configserver:http://localhost:2222/
+  boot:
+    admin:
+      client:
+        url: http://localhost:1111/
+    
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+server:
+ port: 8888
+ 
+payment-service:
+  keys:
+    razorPayAPIKey: xxxxxxxxxxxxxxxx
+    razorPaySecretKey: xxxxxxxxxxxxxx
