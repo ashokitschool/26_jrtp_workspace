@@ -1,0 +1,566 @@
+{
+	"info": {
+		"_postman_id": "c199375f-5412-4d6d-9f0c-f38d842cc63f",
+		"name": "ashokit_ecomm-app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26210511"
+	},
+	"item": [
+		{
+			"name": "auth_service",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "user",
+									"value": "{\n\n \"fname\" : \"john\",\n \"lname\" : \"kumar\",\n \"email\" : \"john@gmail.com\",\n \"pwd\" : \"abc@123\",\n \"mobile\" : \"123456\"\n \n}",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/ashok/OneDrive/Desktop/Posters/gen-ai.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8081/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"email\" : \"ashok@gmail.com\",\r\n \"pwd\" : \"abc@123\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "product_service",
+			"item": [
+				{
+					"name": "category_api",
+					"item": [
+						{
+							"name": "add_category",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8082/categories",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"categories"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "allcategories",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8082/categories",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"categories"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "categorybyId",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8082/categories/{id}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"categories",
+										"{id}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update_category",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8082/categories/{id}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"categories",
+										"{id}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "product_api",
+					"item": [
+						{
+							"name": "addproduct",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8082/products/addProduct",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"products",
+										"addProduct"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updateproduct",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8082/products/{id}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"products",
+										"{id}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "allproducts",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8082/products",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"products"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "productbyId",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8082/products/{id}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"products",
+										"{id}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deleteproductbyId",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8082/products/{id}",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"products",
+										"{id}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update-stock",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8082/products/{id}/stock",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"products",
+										"{id}",
+										"stock"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "cart_service",
+			"item": [
+				{
+					"name": "addcart",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8083/addCart",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"addCart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updatecart-qtyById",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8083/updateCart",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"updateCart"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getcart-ById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8083/cart/{id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"cart",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deletecart-ById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8083/deletecart/{id}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8083",
+							"path": [
+								"deletecart",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "orders_service",
+			"item": [
+				{
+					"name": "addorder",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8084/addOrders",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"addOrders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-order",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8084/updateOrder",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"updateOrder"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ordersById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8084/orders/{userId}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"orders",
+								"{userId}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ordersBydate/status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8084/orders/{orderDate}/{orderStatus}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"orders",
+								"{orderDate}",
+								"{orderStatus}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "allorders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8084/orders",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8084",
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "reports_service",
+			"item": [
+				{
+					"name": "download-excelorder",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8085/reports/FilterOrderExcel",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8085",
+							"path": [
+								"reports",
+								"FilterOrderExcel"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "download-pdforder",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8085/reports/FilterOrderPdf",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8085",
+							"path": [
+								"reports",
+								"FilterOrderPdf"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "payment_service",
+			"item": [
+				{
+					"name": "intiate-payment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8888/payment/intiate-payment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"payment",
+								"intiate-payment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "payment-callback",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8888/payment/payment-callback",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8888",
+							"path": [
+								"payment",
+								"payment-callback"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
