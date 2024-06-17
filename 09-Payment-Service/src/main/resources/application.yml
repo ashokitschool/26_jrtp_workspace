@@ -3,6 +3,10 @@ spring:
     name: 09-Payment-Service
   config:
     import: optional:configserver:http://localhost:2222/
+  datasource:
+    username: ashokit
+    password: AshokIT@123
+    url: jdbc:mysql://localhost:3306/ashokit_ecomm
   boot:
     admin:
       client:

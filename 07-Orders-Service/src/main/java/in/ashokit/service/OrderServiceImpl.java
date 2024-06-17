@@ -49,7 +49,7 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public List<ProductOrderDto> getOrdersByUserId(Integer userId) {
 
-		 List<Orders> orders = orderRepo.findByUserId(userId);
+		 List<Orders> orders = orderRepo.findByUserID(userId);
 		    if (orders != null && !orders.isEmpty()) {
 		        return orders.stream().map(OrderMapper::convertToDto).collect(Collectors.toList());
 		    } else {
@@ -58,7 +58,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public List<ProductOrderDto> getOrdersByDateAndStatus(LocalDate orderDate, String orderStatus) {
+	public List<ProductOrderDto> getOrdersByDateAndStatus(String orderDate, String orderStatus) {
 		List<Orders> orders=orderRepo.findByOrderDateAndOrderStatus(orderDate, orderStatus);
 		if(orders!=null) {
 			return orders.stream().map(OrderMapper::convertToDto).collect(Collectors.toList());

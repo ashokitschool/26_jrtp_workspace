@@ -1,11 +1,12 @@
 spring:
   application:
     name: 05-Product-Service
+  config:
+    import: optional:configserver:http://localhost:2222/
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    password: Natabar@143
+    username: ashokit
+    password: AshokIT@123
     url: jdbc:mysql://localhost:3306/ashokit_ecomm
-    username: root
   jpa:
     hibernate:
       ddl-auto: update

@@ -9,6 +9,6 @@ import in.ashokit.entity.Orders;
 
 public interface OrdersRepository  extends JpaRepository<Orders,Integer>{
 
-	public List<Orders> findByUserId(Integer userId);
-	public List<Orders> findByOrderDateAndOrderStatus(LocalDate orderDate,String orderStatus);
+	public List<Orders> findByUserID(Integer userId);
+	public List<Orders> findByOrderDateAndOrderStatus(String orderDate,String orderStatus);
 }

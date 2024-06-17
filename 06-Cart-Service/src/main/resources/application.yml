@@ -4,10 +4,9 @@ spring:
   config:
     import: optional:configserver:http://localhost:2222/
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    password: root
-    url: jdbc:mysql://localhost:3306/ecommerceapp
-    username: root
+    username: ashokit
+    password: AshokIT@123
+    url: jdbc:mysql://localhost:3306/ashokit_ecomm
   jpa:
     hibernate:
       ddl-auto: update

@@ -2,7 +2,7 @@ package in.ashokit.exception;
 
 import lombok.Builder;
 
-@Builder
+
 public class OrderServiceException extends RuntimeException {
 	private String errCode;
 

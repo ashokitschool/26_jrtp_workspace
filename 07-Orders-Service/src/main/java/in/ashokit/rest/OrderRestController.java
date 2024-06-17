@@ -80,7 +80,7 @@ public class OrderRestController {
 
 	@GetMapping("/orders/{orderDate}/{orderStatus}")
 	public ResponseEntity<ApiResponse<List<ProductOrderDto>>> getOrderByDateAndStatus(
-			@PathVariable("orderDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate orderDate,
+			@PathVariable("orderDate")String orderDate,
 			@PathVariable("orderStatus") String orderStatus) {
 
 		ApiResponse<List<ProductOrderDto>> response = new ApiResponse<>();
