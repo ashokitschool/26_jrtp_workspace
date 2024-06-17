@@ -166,7 +166,19 @@
 							"name": "addproduct",
 							"request": {
 								"method": "POST",
-								"header": [],
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "file",
+									"file": {
+										"src": "/C:/Users/kanch/AshokIt/MajorProject-Ecommerce/postman-testdata/mixie.jpg"
+									}
+								},
 								"url": {
 									"raw": "http://localhost:8082/products/addProduct",
 									"protocol": "http",
@@ -377,6 +389,15 @@
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"orderId\":7456,\r\n \"userID\":1,\r\n \"productId\":1001,\r\n \"quantity\":2,\r\n  \"price\":6500,\r\n  \"paymentType\":\"card\",\r\n   \"orderStatus\":\"pending\",\r\n   \"orderDate\":\"17/6/2024\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://localhost:8084/addOrders",
 							"protocol": "http",
