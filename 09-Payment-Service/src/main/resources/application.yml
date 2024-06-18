@@ -1,27 +1,5 @@
 spring:
   application:
-    name: 09-Payment-Service
+    name: Payment-Service
   config:
     import: optional:configserver:http://localhost:2222/
-  datasource:
-    username: ashokit
-    password: AshokIT@123
-    url: jdbc:mysql://localhost:3306/ashokit_ecomm
-  boot:
-    admin:
-      client:
-        url: http://localhost:1111/
-    
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
-
-server:
- port: 8888
- 
-payment-service:
-  keys:
-    razorPayAPIKey: xxxxxxxxxxxxxxxx
-    razorPaySecretKey: xxxxxxxxxxxxxx

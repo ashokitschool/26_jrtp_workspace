@@ -1,7 +1,5 @@
 package in.ashokit.exception;
-import lombok.Builder;
 
-@Builder
 public class ExceptionResponse {
 	
 	private String errCode;

@@ -1,20 +1,5 @@
 spring:
   application:
-    name: Reports-Service
+    name: Report-Service
   config:
     import: optional:configserver:http://localhost:2222/
-  datasource:
-    username: ashokit
-    password: AshokIT@123
-    url: jdbc:mysql://localhost:3306/ashokit_ecomm
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-
- 
-    
-reports-service:
- messages:
-  orderFetch: All Orders fetched successfully
-  orderFetchErr: Failed to fetch all Orders

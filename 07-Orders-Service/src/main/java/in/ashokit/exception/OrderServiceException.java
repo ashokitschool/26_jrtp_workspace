@@ -1,8 +1,5 @@
 package in.ashokit.exception;
 
-import lombok.Builder;
-
-
 public class OrderServiceException extends RuntimeException {
 	private String errCode;
 
@@ -22,5 +19,5 @@ public class OrderServiceException extends RuntimeException {
 	public void setErrCode(String errCode) {
 		this.errCode = errCode;
 	}
-	
+
 }
