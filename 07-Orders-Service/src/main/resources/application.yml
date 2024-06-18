@@ -1,33 +1,5 @@
 spring:
   application:
-    name: 07-Orders-Service
+    name: Order-Service
   config:
     import: optional:configserver:http://localhost:2222/
-  datasource:
-    username: ashokit
-    password: AshokIT@123
-    url: jdbc:mysql://localhost:3306/ashokit_ecomm
-  jpa:
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQLDialect
-    show-sql: true
-    
-server:
-  port: 8084
-  
-  # Application Messages Goes Here
-orders-service:
-  messages:
-    addOrders: Orders Added Successfully
-    addOrdersErr: Failed to add orders
-    updateOrder: Order Updated Successfully
-    updateOrderErr: Failed to update order
-    selectOrdersByUserId: Orders Retrieved Successfully
-    selectOrdersByUserIdErr: Failed to fetch all orders
-    selectOrdersByDateAndStatus: Orders Retrieved Successfully
-    selectOrdersByDateAndStatusErr: Failed to retrieve the orders
-    fetchOrders: All Orders Retrieved Successfully
-    fetchOrdersErr: Failed to fetch all orders

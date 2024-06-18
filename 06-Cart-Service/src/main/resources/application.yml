@@ -3,33 +3,3 @@ spring:
     name: Cart-Service
   config:
     import: optional:configserver:http://localhost:2222/
-  datasource:
-    username: ashokit
-    password: AshokIT@123
-    url: jdbc:mysql://localhost:3306/ashokit_ecomm
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-
-  boot:
-    admin:
-      client:
-        url: http://localhost:1111/
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
-server:
-  port: 8083
-
-cart-service:
-  messages:
-    cart_added: Cart added sucessfully
-    cart_add_err: Failed to add Cart
-    cart_update_sucess: Cart Update sucessfully
-    cart_update_err: cart update failed
-    cart_retrieve_sucess: cart retrieve sucess
-    cart_retrieve_err: cart retrieve failed
-    cart_delete_sucess: cart deleted sucessfully
