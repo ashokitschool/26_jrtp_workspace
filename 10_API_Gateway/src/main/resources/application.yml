@@ -1,0 +1,38 @@
+server:
+  port: 3333
+
+spring:
+  cloud:
+    gateway:
+      routes:
+      - id: auth-service
+        uri: lb://Auth-Service
+        predicates:
+        - Path=/auth/**
+      - id: products-service
+        uri: lb://Product-Service
+        predicates:
+        - Path=/products/**
+      - id: caetegory-service
+        uri: lb://Product-Service
+        predicates:
+        - Path=/categories/**
+      - id: cart-service
+        uri: lb://Cart-Service
+        predicates:
+        - Path=/cart/**
+      - id: order-service
+        uri: lb://Order-Service
+        predicates:
+        - Path=/orders/**
+      - id: report-service
+        uri: lb://Report-Service
+        predicates:
+        - Path=/reports/**        
+      - id: payment-service
+        uri: lb://Payment-Service
+        predicates:
+        - Path=/payments/**    
+        
+  application:
+    name: CLOUD-API-GATEWAY
